@@ -1,2 +1,4 @@
 .Rhistory
 config.R
+.httr-oauth
+oauth_token
