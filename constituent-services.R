@@ -109,3 +109,85 @@ d$secondary_issue_type <- ifelse(d$typeId %in% serviceRequests, "Service Request
 
 ### Write the final data
 write.csv(d, "//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/311_Somerville.csv", row.names = FALSE)
+
+
+
+
+#### Upload to Socrata ####
+d_311 <- d
+
+# Get rid of NAs because they cause problems on Socrata's end
+d_311_For_Socrata <- d_311 %>%
+  mutate(neighborhood_district = paste("Ward", substring(district, 1, 1)), 
+         neighborhood_district = ifelse(neighborhood_district == "Ward ", "", neighborhood_district),
+         ticket_closed_date_time = dateLastAction,
+         location = paste(streetNum, " ", streetName, ", ", "Somerville, MA", " (", latitude, ", ", longitude, ")", sep=""),
+         street_address = paste(streetNum, " ", streetName, sep=""),
+         ticket_status = ifelse(LastAction != "Closed", "Open", "Closed")) %>%
+  rename(ticket_id = id, issue_description = dept, issue_type = typeName, city = cityName, ticket_created_date_time = displayDate, ticket_last_updated_date_time = dateLastAction) %>% 
+  select(-comments, -streetId, -streetName, -streetNum, -district, -city, -latitude, -longitude, -typeId, -LastAction)
+
+# Fix addresses
+# d_311_For_Socrata$Location_1 = gsub("NA, Somerville, MA \\(0, 0\\)", NA, d_311_For_Socrata$Location_1)
+# This line above works, but throws errors on PUT requests when Socrata cannot geocode
+
+
+# IF not closed, give NA for closed date and time
+d_311_For_Socrata$ticket_closed_date_time[d_311_For_Socrata$ticket_status != "Closed"] <- ""
+
+# Write locally
+write.csv(d_311_For_Socrata, "./tmp/311.csv", row.names = FALSE, na = "")
+
+
+## We also needed just the work orders to make the 311 app work better
+d_311_For_Socrata_Just_WO <- d_311_For_Socrata %>% 
+  filter(secondary_issue_type == "Service Requests")
+
+# Write locally
+write.csv(d_311_For_Socrata_Just_WO, "./tmp/311_Just_WO.csv", row.names = FALSE, na = "")
+
+
+# Upload to Socrata
+PUT("https://data.somervillema.gov/resource/vqwi-n3ah.json",
+    body = upload_file("./tmp/311.csv"),
+    authenticate(Socrata_username, Socrata_password), 
+    add_headers("X-App-Token" = Socrata_token,
+                "Content-Type" = "text/csv"))
+
+# Now just work orders
+PUT("https://data.somervillema.gov/resource/xs7t-pxkc.json",
+    body = upload_file("./tmp/311_Just_WO.csv"),
+    authenticate(Socrata_username, Socrata_password), 
+    add_headers("X-App-Token" = Socrata_token,
+                "Content-Type" = "text/csv"))
+
+
+
+
+
+
+
+
+
+# Footnotes
+# #### The initial Data dump ####
+# # QSend API undocumented method to get all data
+# 
+# api <- "https://somervillema.qscend.com/qalert/api/v1/requests/dump/?start=7%2F1%2F2015&key=5c2b987d13cc414cb26f956cf31fbffc8ca62dc37d1a4f6bba3cc74398162db5"
+# 
+# d <- fromJSON(api)
+# 
+# request <- d$request
+# activity <- d$activity
+# attachment <- d$attachment
+# submitter <- d$submitter
+# deleted <- d$deleted
+# reqcustom <- d$reqcustom
+# 
+# write.csv(request, "./data/2015_08_20_Qalert_Data_Dump/request.csv", row.names = FALSE)
+# write.csv(activity, "./data/2015_08_20_Qalert_Data_Dump/activity.csv", row.names = FALSE)
+# write.csv(attachment, "./data/2015_08_20_Qalert_Data_Dump/attachment.csv", row.names = FALSE)
+# write.csv(submitter, "./data/2015_08_20_Qalert_Data_Dump/submitter.csv", row.names = FALSE)
+# write.csv(deleted, "./data/2015_08_20_Qalert_Data_Dump/deleted.csv", row.names = FALSE)
+# write.csv(reqcustom, "./data/2015_08_20_Qalert_Data_Dump/reqcustom.csv", row.names = FALSE)
+
