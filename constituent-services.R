@@ -35,7 +35,7 @@ api <- paste("https://somervillema.qscend.com/qalert/api/v1/requests/changes/?si
 d <- fromJSON(api)
 
 activityChanges <- d$activity
-submitterChanges <- d$submitter
+submitterChanges <- d$submitter %>% select(-twitterId, -twitterScreenName)
 requestChanges <- d$request
 # reqcustomChanges <- d$reqcustom
 
@@ -105,6 +105,14 @@ DPWInternal <- c(473,476,474,402500,475,481,477,487,478,470,480)
 d$secondary_issue_type <- ifelse(d$typeId %in% serviceRequests, "Service Requests", 
                                  ifelse(d$typeId %in% informationCalls, "information calls",
                                         ifelse(d$typeId %in% DPWInternal, "DPW Internal", NA)))
+
+
+## Here is for when 311 changes the type names
+d <- d %>% 
+  mutate(typeName = ifelse(typeName == "Appeal issue", "Appeal issue Request", typeName),
+         typeName = ifelse(typeName == "Reissue notice", "Reissue notice Request", typeName),
+         typeName = ifelse(typeName == "Reschedule hearing", "Reschedule hearing request", typeName))
+
 
 
 ### Write the final data
