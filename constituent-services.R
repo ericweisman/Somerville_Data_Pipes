@@ -86,9 +86,14 @@ lastAction <- activityUpdated  %>%
 
 d <- merge(requestUpdated, lastAction, by.x = "id", by.y = "requestId")
 
+#### Narrow down to useful columns for saving in various locations ####
+# I drop displayLastAction because it is not the same as the date I create above
+# Because above I take out things like "printed"
+# Who cares when it was printed?!? That's not an action
+d <- d %>% 
+  select(id, cityName, comments, dept, displayDate, district, latitude, longitude, streetId: dateLastAction)
 
 
-# TODO : update these. They don't seem to catch everything, and there has to be a better way
 # Create a more general 'type' column from the #s given to me by S. Craig
 # Call it the weird name because that is a socrata convention
 serviceRequests <- c(269, 422,424,492,425,503, 504,427,428,272,417,418,475,419,420,421, 273,274,493,494,271, 495,496,413,414,415,502,497,498,471,499,500,501,506,507,508,509,510,511,505,512,275,580,482,315,316, 317,276,466,299,301,488,302,303,304,305,307,308,277,310,311,594,467,483,484,278,322,437,438,439,440,441,442,443,338,444,445,446,447,340,448,449,450,451,470,452,341,453,454,456,455,457,458,459,460,461,462,464,465,463,339,280,360,346,347,348,349,361,364,318,350,351,352,353,366,365,386,367,358,402663,370,371,369,281,289,290,294,293,295,282,284,550,588,400324,435,287)
@@ -99,23 +104,7 @@ DPWInternal <- c(473,476,474,402500,475,481,477,487,478,470,480)
 
 d$secondary_issue_type <- ifelse(d$typeId %in% serviceRequests, "Service Requests", 
                                  ifelse(d$typeId %in% informationCalls, "information calls",
-                                        ifelse(d$typeId %in% DPWInternal, "internally generated", NA)))
-
-# Control panel is also internal 
-# TODO : double check this, especially for T&P
-d$secondary_issue_type <- ifelse(d$origin == "Control Panel", "internally generated", 
-                                 d$secondary_issue_type)
-
-
-
-
-#### Narrow down to useful columns for saving in various locations ####
-# I drop displayLastAction because it is not the same as the date I create above
-# Because above I take out things like "printed"
-# Who cares when it was printed?!? That's not an action
-d <- d %>% 
-  select(id, cityName, comments, dept, displayDate, district, latitude, longitude, streetId: dateLastAction)
-
+                                        ifelse(d$typeId %in% DPWInternal, "DPW Internal", NA)))
 
 
 ## Here is for when 311 changes the type names
