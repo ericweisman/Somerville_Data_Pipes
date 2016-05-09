@@ -104,7 +104,8 @@ d$secondary_issue_type <- ifelse(d$typeId %in% serviceRequests, "Service Request
 
 # Control panel is also internal 
 # TODO : double check this, especially for T&P
-d$secondary_issue_type <- ifelse(d$origin == "Control Panel", "internally generated", 
+d$secondary_issue_type <- ifelse(d$origin == "Control Panel" | d$origin == "QAlert Mobile iOS", 
+                                 "internally generated", 
                                  d$secondary_issue_type)
 
 
