@@ -9,23 +9,27 @@ setwd("c:/Users/dhadley/Documents/GitHub/Somerville_Data_Pipes/")
 
 library(RCurl)
 
-
+# I save two copies, one that is for the pipelines, which I hope people will not use
 
 qol <- getURL(url = "https://data.somervillema.gov/api/views/n5sm-r6zx/rows.csv?accessType=DOWNLOAD", ssl.verifypeer=0L, followlocation=1L)
 
 writeLines(qol,'//fileshare1/Departments2/Somerstat Data/Police/daily/QualityOfLife.csv')
+writeLines(qol,'//fileshare1/Departments2/Somerstat Data/Police/daily/data_pipeline_dont_use/QualityOfLife.csv')
 
 
 ci <- getURL(url = "https://data.somervillema.gov/api/views/4jey-jqxb/rows.csv?accessType=DOWNLOAD", ssl.verifypeer=0L, followlocation=1L)
 
 writeLines(ci, "//fileshare1/Departments2/Somerstat Data/Police/daily/CriminalIncidents.csv")
+writeLines(qol,'//fileshare1/Departments2/Somerstat Data/Police/daily/data_pipeline_dont_use/QualityOfLife.csv')
 
 
 mvc <- getURL(url = "https://data.somervillema.gov/api/views/3md9-rv67/rows.csv?accessType=DOWNLOAD", ssl.verifypeer=0L, followlocation=1L)
 
 writeLines(mvc,'//fileshare1/Departments2/Somerstat Data/Police/daily/MotorVehicleCitations.csv')
+writeLines(qol,'//fileshare1/Departments2/Somerstat Data/Police/daily/data_pipeline_dont_use/QualityOfLife.csv')
 
 
 te <- getURL(url = "https://data.somervillema.gov/api/views/j2bq-38ev/rows.csv?accessType=DOWNLOAD", ssl.verifypeer=0L, followlocation=1L)
 
 writeLines(te, "//fileshare1/Departments2/Somerstat Data/Police/daily/TrafficEnforcement.csv")
+writeLines(qol,'//fileshare1/Departments2/Somerstat Data/Police/daily/data_pipeline_dont_use/QualityOfLife.csv')

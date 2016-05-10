@@ -20,10 +20,10 @@ library(httr) # Upload to Socrata
 
 ## Load old data from SomerStat shared drive ##
 # I leave out reqcustom because it is massive and worthless
-activity <- read.csv("//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/activity.csv")
-submitter <- read.csv("//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/submitter.csv")
-request <- read.csv("//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/request.csv")
-# reqcustom <- read.csv("//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/reqcustom.csv")
+activity <- read.csv("//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_dont_use/activity.csv")
+submitter <- read.csv("//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_dont_use/submitter.csv")
+request <- read.csv("//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_dont_use/request.csv")
+# reqcustom <- read.csv("//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_dont_use/reqcustom.csv")
 
 
 # Changes since x using the Qscend API
@@ -61,13 +61,13 @@ submitterUpdated <- rbind(submitterChanges, submitter[!submitter$id %in% submitt
 #### Write it ####
 
 # Write it to the P: drive 
-write.csv(requestUpdated, "//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/request.csv", row.names = FALSE)
+write.csv(requestUpdated, "//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_dont_use/request.csv", row.names = FALSE)
 
-write.csv(activityUpdated, "//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/activity.csv", row.names = FALSE)
+write.csv(activityUpdated, "//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_dont_use/activity.csv", row.names = FALSE)
 
-write.csv(submitterUpdated, "//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/submitter.csv", row.names = FALSE)
+write.csv(submitterUpdated, "//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_dont_use/submitter.csv", row.names = FALSE)
 
-# write.csv(reqcustomUpdated, "//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/reqcusreqcustom.csv", row.names = FALSE)
+# write.csv(reqcustomUpdated, "//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_dont_use/reqcusreqcustom.csv", row.names = FALSE)
 
 
 # Remove everything else
@@ -130,6 +130,9 @@ d <- d %>%
 
 ### Write the final data
 write.csv(d, "//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/311_Somerville.csv", row.names = FALSE)
+
+# and one for the daily dashboard in the do not use folder
+write.csv(d, "//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_dont_use/311_Somerville.csv", row.names = FALSE)
 
 
 

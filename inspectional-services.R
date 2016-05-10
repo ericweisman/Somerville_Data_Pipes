@@ -56,6 +56,8 @@ d$PermitTypeDetail <- ifelse(substr(d$Permit., 1, 2) == "B1", "Building",
 # Write it to the local and P: drives
 write.csv(d, "//fileshare1/Departments2/Somerstat Data/Inspectional_Services/data/Daily_Permits.csv")
 
+write.csv(d, "//fileshare1/Departments2/Somerstat Data/Inspectional_Services/data/data_pipeline_dont_use/Daily_Permits.csv")
+
 
 # Remove everything else
 remove(url, x)
