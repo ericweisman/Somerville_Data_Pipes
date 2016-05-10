@@ -3,7 +3,7 @@
 
 
 # working Directory and packages #
-setwd("c:/Users/dhadley/Documents/GitHub/2015_Citizenserve_Data/")
+setwd("c:/Users/dhadley/Documents/GitHub/Somerville_Data_Pipes/")
 
 # This pulls in the credentials you need
 source("./config.R")
