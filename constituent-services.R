@@ -27,8 +27,8 @@ request <- read.csv("//fileshare1/Departments2/Somerstat Data/Constituent_Servic
 
 
 # Changes since x using the Qscend API
-# I do five days ago in case there is a problem for one or two days with the system
-since <- Sys.Date() - 5
+# I do ten days ago in case there is a problem for one or two days with the system
+since <- Sys.Date() - 10
 
 api <- paste("https://somervillema.qscend.com/qalert/api/v1/requests/changes/?since=", month(since), "%2F", day(since), "%2F", year(since), "&key=", Qsend_API_key, sep = "")
 
