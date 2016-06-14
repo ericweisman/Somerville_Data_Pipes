@@ -26,7 +26,9 @@ request <- read.csv("//fileshare1/Departments2/Somerstat Data/Constituent_Servic
 # reqcustom <- read.csv("//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_dont_use/reqcustom.csv")
 
 
-# Changes since x using the Qscend API
+
+
+### Changes since x using the Qscend API
 # I do ten days ago in case there is a problem for one or two days with the system
 since <- Sys.Date() - 10
 
@@ -70,8 +72,31 @@ write.csv(submitterUpdated, "//fileshare1/Departments2/Somerstat Data/Constituen
 # write.csv(reqcustomUpdated, "//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_dont_use/reqcusreqcustom.csv", row.names = FALSE)
 
 
+
+
+#### Now we add an output to the check_pipes file ####
+check_the_pipes <- read.csv("./check-the-pipes.csv", stringsAsFactors = FALSE)
+
+# First I am just going to add today's date to show when the script ran
+check_the_pipes[which(check_the_pipes$data_set == "Constituent Services"), 2] <- as.character(Sys.Date())
+
+
+# Now a simple message on each saying whether the data was downloaded or not
+check_the_pipes[which(check_the_pipes$data_set == "Constituent Services"), 3] <- 
+  ifelse(length(activityChanges) < 2, 
+         "Error dowloading latest data from Qscend API",
+         paste("Downloaded latest data from Qscend API. Last activity from:", 
+               activityChanges$displayDate[nrow(activityChanges)]))
+
+
+write.csv(check_the_pipes, "./check-the-pipes.csv", row.names = FALSE)
+
+
+
 # Remove everything else
-remove(activity, activityChanges, request, requestChanges, submitter, submitterChanges, reqcustom, reqcustomChanges, d)
+remove(activity, activityChanges, request, requestChanges, submitter, submitterChanges, reqcustom, reqcustomChanges, d, check_the_pipes)
+
+
 
 
 #### Prepare a singe datset for upload to Socrata and elsewhere ####

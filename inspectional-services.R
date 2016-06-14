@@ -27,6 +27,27 @@ url<-paste(citizenserve_FTP, fileDate,".txt", sep="")
 x <-getBinaryURL(url, userpwd = citizenserve_FTP_userpwd )
 
 
+
+
+#### Now we add an output to the check_pipes file ####
+check_the_pipes <- read.csv("./check-the-pipes.csv", stringsAsFactors = FALSE)
+
+# First I am just going to add today's date to show when the script ran
+check_the_pipes[which(check_the_pipes$data_set == "ISD"), 2] <- as.character(Sys.Date())
+
+
+# Now a simple message on each saying whether the data was downloaded or not
+check_the_pipes[which(check_the_pipes$data_set == "ISD"), 3] <- 
+  ifelse(length(x) < 2, 
+         "Error dowloading latest data from CitizenServe FTP",
+         "Downloaded latest data from CitizenServe FTP.")
+
+
+write.csv(check_the_pipes, "./check-the-pipes.csv", row.names = FALSE)
+
+
+
+
 # Write it 
 # http://stackoverflow.com/questions/18833031/download-rdata-and-csv-files-from-ftp-using-rcurl-or-any-other-method
 writeBin(x, "./tmp/Daily_Permits.txt")

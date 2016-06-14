@@ -1,5 +1,5 @@
 .Rhistory
-.Rout
+*.Rout
 config.R
 .httr-oauth
 oauth_token

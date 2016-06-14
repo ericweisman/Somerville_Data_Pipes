@@ -46,3 +46,21 @@ write.csv(ga.df, "//fileshare1/Departments2/Somerstat Data/Website_Analytics/Las
 write.csv(ga.df, "//fileshare1/Departments2/Somerstat Data/Website_Analytics/data_pipeline_dont_use/LastTwentyFour.csv")
 
 
+
+
+#### Now we add an output to the check_pipes file ####
+check_the_pipes <- read.csv("./check-the-pipes.csv", stringsAsFactors = FALSE)
+
+# First I am just going to add today's date to show when the script ran
+check_the_pipes[which(check_the_pipes$data_set == "Website Analytics"), 2] <- as.character(Sys.Date())
+
+
+# Now a simple message on each saying whether the data was downloaded or not
+check_the_pipes[which(check_the_pipes$data_set == "Website Analytics"), 3] <- 
+  ifelse(length(ga.df) < 2, 
+         "Error dowloading latest data from Google API",
+         "Downloaded latest data from Google API")
+
+
+write.csv(check_the_pipes, "./check-the-pipes.csv", row.names = FALSE)
+
