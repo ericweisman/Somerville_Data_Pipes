@@ -53,22 +53,22 @@ check_the_pipes[which(check_the_pipes$data_set == "Police_te"), 2] <- as.charact
 check_the_pipes[which(check_the_pipes$data_set == "Police_qol"), 3] <- 
   ifelse(length(qol) != 1, 
          "Error dowloading latest data from Socrata",
-         "Downloaded latest data from Socrata: check for errors in uploading data to Socrata")
+         "Downloaded latest data from Socrata")
 
 check_the_pipes[which(check_the_pipes$data_set == "Police_ci"), 3] <- 
   ifelse(length(ci) != 1, 
          "Error dowloading latest data from Socrata",
-         "Downloaded latest data from Socrata: check for errors in uploading data to Socrata")
+         "Downloaded latest data from Socrata")
 
 check_the_pipes[which(check_the_pipes$data_set == "Police_mvc"), 3] <- 
   ifelse(length(mvc) != 1, 
          "Error dowloading latest data from Socrata",
-         "Downloaded latest data from Socrata: check for errors in uploading data to Socrata")
+         "Downloaded latest data from Socrata")
 
 check_the_pipes[which(check_the_pipes$data_set == "Police_te"), 3] <- 
   ifelse(length(te) != 1, 
          "Error dowloading latest data from Socrata",
-         "Downloaded latest data from Socrata: check for errors in uploading data to Socrata")
+         "Downloaded latest data from Socrata")
 
 
 write.csv(check_the_pipes, "./check-the-pipes.csv", row.names = FALSE)
