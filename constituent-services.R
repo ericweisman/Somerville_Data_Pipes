@@ -91,6 +91,9 @@ check_the_pipes[which(check_the_pipes$data_set == "Constituent Services"), 3] <-
 
 write.csv(check_the_pipes, "./check-the-pipes.csv", row.names = FALSE)
 
+# Since this is the last file called, we also write to the network
+write.csv(check_the_pipes, "//fileshare1/Departments2/Somerstat Data/check-the-pipes.csv", row.names = FALSE)
+
 
 
 # Remove everything else

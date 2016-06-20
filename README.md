@@ -28,3 +28,17 @@ The first one constructs the URL, which sort of functions like an API call the w
 
 ### Socrata
 To upload data, I use the Socrata SODA API by way of an R package called httr. This makes it simple to do a PUT request, which as the name implies, puts data where you tell it to. 
+
+
+## How to automate 
+1. In Windows task scheduler, I create a new task that runs daily with highest privilges
+2. The "Actions" is "start a program," which points to the .bat file in this directory
+3. The .bat file runs the .R scripts, which uploads the data to our web server through FTP
+
+## How to transfer to another machine
+1. Use github to get the latest version, which should be current on the official Somerville account
+2. Change the file paths in all R scripts and .bat files to reflect your desktop environment
+3. Copy the config.R and oauth_token files from the current maintainer (these are not commited in Github)
+4. Install all of the R packages listed in each script
+5. Follow the instruction above to automate 
+6. Profit 
