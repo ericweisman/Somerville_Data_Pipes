@@ -2,7 +2,8 @@
 
 
 # working Directory: the part you change for your machine #
-setwd("c:/Users/dhadley/Documents/GitHub/Somerville_Data_Pipes/")
+setwd("C:/Users/mmastrobuoni.CH2SOM-MMASTROB/Documents/GitHub/Somerville_Data_Pipes")
+
 
 # This pulls in the credentials you need
 # Nothing from this, but make sure to copy the oauth_token when you copy the repository 
@@ -43,7 +44,7 @@ time <- Sys.time()
 ga.df$pageTitle <- gsub("| City of Somerville Website", "", ga.df$pageTitle)
 
 write.csv(ga.df, "//fileshare1/Departments2/Somerstat Data/Website_Analytics/LastTwentyFour.csv")
-write.csv(ga.df, "//fileshare1/Departments2/Somerstat Data/Website_Analytics/data_pipeline_dont_use/LastTwentyFour.csv")
+write.csv(ga.df, "//fileshare1/Departments2/Somerstat Data/Website_Analytics/data_pipeline_pls_dont_use/LastTwentyFour.csv")
 
 
 

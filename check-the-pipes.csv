@@ -1,8 +1,8 @@
-data_set,date_checked,outcome
-ISD,6/16/2016,Downloaded latest data from CitizenServe FTP.
-Constituent Services,6/16/2016,Downloaded latest data from Qscend API. Last activity from: 6/16/2016 2:31 AM
-Website Analytics,6/16/2016,Downloaded latest data from Google API
-Police_qol,6/16/2016,Downloaded latest data from Socrata
-Police_ci,6/16/2016,Downloaded latest data from Socrata
-Police_mvc,6/16/2016,Downloaded latest data from Socrata
-Police_te,6/16/2016,Downloaded latest data from Socrata
+"data_set","date_checked","outcome"
+"ISD","2016-06-23","Downloaded latest data from CitizenServe FTP."
+"Constituent Services","2016-06-23","Downloaded latest data from Qscend API. Last activity from: 6/23/2016 9:39 AM"
+"Website Analytics","2016-06-23","Downloaded latest data from Google API"
+"Police_qol","2016-06-23","Downloaded latest data from Socrata"
+"Police_ci","2016-06-23","Downloaded latest data from Socrata"
+"Police_mvc","2016-06-23","Downloaded latest data from Socrata"
+"Police_te","2016-06-23","Downloaded latest data from Socrata"

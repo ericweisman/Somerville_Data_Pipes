@@ -2,7 +2,7 @@
 
 
 # working Directory: the part you change for your machine #
-setwd("C:/Users/dhadley/Documents/GitHub/Somerville_Data_Pipes/")
+setwd("C:/Users/mmastrobuoni.CH2SOM-MMASTROB/Documents/GitHub/Somerville_Data_Pipes")
 
 # This pulls in the credentials you need
 source("./config.R")
@@ -20,10 +20,10 @@ library(httr) # Upload to Socrata
 
 ## Load old data from SomerStat shared drive ##
 # I leave out reqcustom because it is massive and worthless
-activity <- read.csv("//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_dont_use/activity.csv")
-submitter <- read.csv("//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_dont_use/submitter.csv")
-request <- read.csv("//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_dont_use/request.csv")
-# reqcustom <- read.csv("//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_dont_use/reqcustom.csv")
+activity <- read.csv("//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_pls_dont_use/activity.csv")
+submitter <- read.csv("//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_pls_dont_use/submitter.csv")
+request <- read.csv("//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_pls_dont_use/request.csv")
+# reqcustom <- read.csv("//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_pls_dont_use/reqcustom.csv")
 
 
 
@@ -63,13 +63,13 @@ submitterUpdated <- rbind(submitterChanges, submitter[!submitter$id %in% submitt
 #### Write it ####
 
 # Write it to the P: drive 
-write.csv(requestUpdated, "//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_dont_use/request.csv", row.names = FALSE)
+write.csv(requestUpdated, "//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_pls_dont_use/request.csv", row.names = FALSE)
 
-write.csv(activityUpdated, "//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_dont_use/activity.csv", row.names = FALSE)
+write.csv(activityUpdated, "//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_pls_dont_use/activity.csv", row.names = FALSE)
 
-write.csv(submitterUpdated, "//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_dont_use/submitter.csv", row.names = FALSE)
+write.csv(submitterUpdated, "//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_pls_dont_use/submitter.csv", row.names = FALSE)
 
-# write.csv(reqcustomUpdated, "//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_dont_use/reqcusreqcustom.csv", row.names = FALSE)
+# write.csv(reqcustomUpdated, "//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_pls_dont_use/reqcusreqcustom.csv", row.names = FALSE)
 
 
 
@@ -160,7 +160,7 @@ d <- d %>%
 write.csv(d, "//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/311_Somerville.csv", row.names = FALSE)
 
 # and one for the daily dashboard in the do not use folder
-write.csv(d, "//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_dont_use/311_Somerville.csv", row.names = FALSE)
+write.csv(d, "//fileshare1/Departments2/Somerstat Data/Constituent_Services/data/data_pipeline_pls_dont_use/311_Somerville.csv", row.names = FALSE)
 
 
 

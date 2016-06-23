@@ -3,7 +3,7 @@
 
 
 # working Directory and packages #
-setwd("c:/Users/dhadley/Documents/GitHub/Somerville_Data_Pipes/")
+setwd("C:/Users/mmastrobuoni.CH2SOM-MMASTROB/Documents/GitHub/Somerville_Data_Pipes/")
 
 # This pulls in the credentials you need
 source("./config.R")
@@ -77,7 +77,7 @@ d$PermitTypeDetail <- ifelse(substr(d$Permit., 1, 2) == "B1", "Building",
 # Write it to the local and P: drives
 write.csv(d, "//fileshare1/Departments2/Somerstat Data/Inspectional_Services/data/Daily_Permits.csv")
 
-write.csv(d, "//fileshare1/Departments2/Somerstat Data/Inspectional_Services/data/data_pipeline_dont_use/Daily_Permits.csv")
+write.csv(d, "//fileshare1/Departments2/Somerstat Data/Inspectional_Services/data/data_pipeline_pls_dont_use/Daily_Permits.csv")
 
 
 # Remove everything else
