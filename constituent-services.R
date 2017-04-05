@@ -41,6 +41,9 @@ submitterChanges <- d$submitter %>% select(-twitterId, -twitterScreenName)
 requestChanges <- d$request
 # reqcustomChanges <- d$reqcustom
 
+# on 3/27 QScend added a new variable called files, assuming it is a boolean for attachments, it's not needed, we remove it here. 
+activityChanges <- select(activityChanges, -files)
+
 
 ## Now merge the dataframes ##
 
